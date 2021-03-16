@@ -26,6 +26,11 @@ Consider the following scenario:
 
 You want to force the non-authoritative synchronization of sysvol replication on a domain controller (DC). In the File Replication Service (FRS), it was controlled through the **D2** and **D4** data values for the `Bur Flags` registry values, but these values don't exist for the Distributed File System Replication (DFSR) service. You can't use the DFS Management snap-in (Dfsmgmt.msc) or the Dfsradmin.exe command-line tool to achieve this. Unlike custom DFSR replicated folders, sysvol replication is intentionally protected from any editing through its management interfaces to prevent accidents.
 
+In the latest Windows Server 2012R2 builds DFS Management Tools are not installed. To install these tools, execute the following command in a PowerShell console with Administrator privileges:
+
+	```console
+	Install-WindowsFeature RSAT-DFS-Mgmt-Con
+	```
 ## How to perform a non-authoritative synchronization of DFSR-replicated sysvol replication (like D2 for FRS)
 
 1. In the ADSIEDIT.MSC tool, modify the following distinguished name (DN) value and attribute on each of the domain controllers (DCs) that you want to make non-authoritative:
